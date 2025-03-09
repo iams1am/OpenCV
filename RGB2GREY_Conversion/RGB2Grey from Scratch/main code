@@ -1,0 +1,149 @@
+import cv2 #opencv library for image processing
+import os #provides functions for interacting with the operating system (file paths, directory creation)
+import matplotlib.pyplot as plt # For displaying images and creating visual comparisons
+import numpy as np #Used for numerical operations on image arrays
+
+def convert_to_grayscale(input_path, output_path=None, show_comparison=False):
+    """
+    Convert a color image to grayscale and optionally show a comparison.
+    
+    Args:
+        input_path (str): Path to the input color image
+        output_path (str, optional): Path to save the grayscale image
+        show_comparison (bool, optional): Whether to display the comparison
+    
+    Returns:
+        numpy.ndarray: The grayscale image
+    """
+    # Read the image
+    img = cv2.imread(input_path)
+    
+    # Check if image was loaded successfully
+    if img is None:
+        print(f"Error: Could not read image at {input_path}")
+        return None
+    
+    # Convert BGR to RGB for display purposes
+    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    
+    # Convert to grayscale
+    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    # Save the grayscale image if output path is provided
+    if output_path:
+        cv2.imwrite(output_path, img_gray)
+        print(f"Grayscale image saved to {output_path}")
+    
+    # Show comparison if requested
+    if show_comparison:
+        plt.figure(figsize=(10, 5))
+        
+        plt.subplot(1, 2, 1)
+        plt.imshow(img_rgb)
+        plt.title('Original')
+        plt.axis('off')
+        
+        plt.subplot(1, 2, 2)
+        plt.imshow(img_gray, cmap='gray')
+        plt.title('Grayscale')
+        plt.axis('off')
+        
+        plt.tight_layout()
+        plt.show()
+    
+    return img_gray
+
+def process_multiple_images(input_dir, output_dir):
+    """
+    Process multiple images in a directory and convert them to grayscale.
+    
+    Args:
+        input_dir (str): Directory containing input images
+        output_dir (str): Directory to save grayscale images
+    """
+    # Create output directory if it doesn't exist
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    # Get all files in the input directory
+    image_files = [f for f in os.listdir(input_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff'))]
+    
+    # Process each image
+    for i, image_file in enumerate(image_files):
+        if i >= 10:  # Limit to 10 images
+            break
+            
+        input_path = os.path.join(input_dir, image_file)
+        output_path = os.path.join(output_dir, f"gray_{image_file}")
+        
+        print(f"Processing {i+1}/{min(len(image_files), 10)}: {image_file}")
+        convert_to_grayscale(input_path, output_path, show_comparison=True)
+
+# Example usage:
+if __name__ == "__main__":
+    # Single image example
+    # convert_to_grayscale("path/to/image.jpg", "path/to/output_gray.jpg", show_comparison=True)
+    
+    # Multiple images example
+    # process_multiple_images("path/to/input_directory", "path/to/output_directory")
+    
+    # For demonstration, let's create and process some sample images
+    # Create a directory for our examples
+    if not os.path.exists("sample_images"):
+        os.makedirs("sample_images")
+    
+    # Create some sample colored images (RGB gradients, patterns, etc.)
+    sample_images = []
+    
+    # 1. Red-Green gradient
+    red_green = np.zeros((200, 200, 3), dtype=np.uint8)
+    for i in range(200):
+        for j in range(200):
+            red_green[i, j, 0] = i  # Red increases with row
+            red_green[i, j, 1] = j  # Green increases with column
+    sample_images.append(("red_green_gradient.jpg", red_green))
+    
+    # 2. Blue-Yellow gradient
+    blue_yellow = np.zeros((200, 200, 3), dtype=np.uint8)
+    for i in range(200):
+        for j in range(200):
+            blue_yellow[i, j, 0] = j  # Red increases with column
+            blue_yellow[i, j, 1] = j  # Green increases with column
+            blue_yellow[i, j, 2] = 200 - i  # Blue decreases with row
+    sample_images.append(("blue_yellow_gradient.jpg", blue_yellow))
+    
+    # 3. Rainbow pattern
+    rainbow = np.zeros((200, 200, 3), dtype=np.uint8)
+    for i in range(200):
+        for j in range(200):
+            rainbow[i, j, 0] = (i + j) % 256  # Red
+            rainbow[i, j, 1] = (i * 2) % 256  # Green
+            rainbow[i, j, 2] = (j * 2) % 256  # Blue
+    sample_images.append(("rainbow_pattern.jpg", rainbow))
+    
+    # 4. Checkerboard pattern
+    checkerboard = np.zeros((200, 200, 3), dtype=np.uint8)
+    for i in range(200):
+        for j in range(200):
+            if (i // 20) % 2 == (j // 20) % 2:
+                checkerboard[i, j] = [255, 0, 0]  # Red
+            else:
+                checkerboard[i, j] = [0, 0, 255]  # Blue
+    sample_images.append(("checkerboard.jpg", checkerboard))
+    
+    # 5. Concentric circles
+    circles = np.zeros((200, 200, 3), dtype=np.uint8)
+    for i in range(200):
+        for j in range(200):
+            dist = np.sqrt((i - 100) ** 2 + (j - 100) ** 2)
+            circles[i, j, 0] = np.sin(dist / 10) * 127 + 128  # Red
+            circles[i, j, 1] = np.cos(dist / 10) * 127 + 128  # Green
+            circles[i, j, 2] = np.sin(dist / 5) * 127 + 128   # Blue
+    sample_images.append(("concentric_circles.jpg", circles))
+    
+    # Save all sample images
+    for filename, img in sample_images:
+        cv2.imwrite(os.path.join("sample_images", filename), img)
+    
+    # Process all the sample images
+    process_multiple_images("sample_images", "sample_grayscale")
