@@ -4,9 +4,6 @@ Microsoft Windows [Version 10.0.22631.4890]
 (c) Microsoft Corporation. All rights reserved.
 #Change to CMD from powershell
 
-E:\Duburi_OpenCV>python -m myenv
-C:\Python313\python.exe: No module named myenv
-
 E:\Duburi_OpenCV>python -m venv myenv
 
 E:\Duburi_OpenCV>myenv\Scripts\activate
@@ -42,11 +39,6 @@ Successfully installed numpy-2.2.3 opencv-python-4.11.0.8Successfully installed 
 
 [notice] A new release of pip is available: 24.3.1 -> 25.0.1
 
-(myenv) E:\Duburi_OpenCV>python duburi_test.py
-Traceback (most recent call last):
-  File "E:\Duburi_OpenCV\duburi_test.py", line 3, in <module>
-    import matplotlib.pyplot as plt
-ModuleNotFoundError: No module named 'matplotlib'
 
 (myenv) E:\Duburi_OpenCV>pip install matplotlib
 Collecting matplotlib
