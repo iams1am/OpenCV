@@ -1,0 +1,29 @@
+import cv2
+import matplotlib.pyplot as plt
+
+# Replace with your image path
+image_path = 'botrgb.jpg'
+
+# Read the original image
+original = cv2.imread(image_path)
+
+# Convert BGR to RGB for matplotlib
+original_rgb = cv2.cvtColor(original, cv2.COLOR_BGR2RGB)
+
+# Read in grayscale mode
+grayscale = cv2.imread(image_path, 0)
+
+# Show side by side
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.imshow(original_rgb)
+plt.title('Original')
+plt.axis('off')
+
+plt.subplot(1, 2, 2)
+plt.imshow(grayscale, cmap='gray')
+plt.title('Grayscale')
+plt.axis('off')
+
+plt.tight_layout()
+plt.show()
