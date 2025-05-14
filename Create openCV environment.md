@@ -4,11 +4,11 @@ Microsoft Windows [Version 10.0.22631.4890]
 (c) Microsoft Corporation. All rights reserved.
 #Change to CMD from powershell
 
-E:\Duburi_OpenCV>python -m venv myenv
+E:\OpenCV>python -m venv myenv
 
-E:\Duburi_OpenCV>myenv\Scripts\activate
+E:\OpenCV>myenv\Scripts\activate
 
-(myenv) E:\Duburi_OpenCV>pip install opencv-python
+(myenv) E:\OpenCV>pip install opencv-python
 Collecting opencv-python
   Using cached opencv_python-4.11.0.86-cp37-abi3-win_amd64.whl.metadata (20 kB)
 Collecting numpy>=1.21.2 (from opencv-python)
@@ -40,7 +40,7 @@ Successfully installed numpy-2.2.3 opencv-python-4.11.0.8Successfully installed 
 [notice] A new release of pip is available: 24.3.1 -> 25.0.1
 
 
-(myenv) E:\Duburi_OpenCV>pip install matplotlib
+(myenv) E:\OpenCV>pip install matplotlib
 Collecting matplotlib
   Downloading matplotlib-3.10.1-cp313-cp313-win_amd64.whl.metadata (11 kB)
 Collecting contourpy>=1.0.1 (from matplotlib)
@@ -81,13 +81,13 @@ Successfully installed contourpy-1.3.1 cycler-0.12.1 fonttools-4.56.0 kiwisolver
 [notice] A new release of pip is available: 24.3.1 -> 25.0.1
 [notice] To update, run: python.exe -m pip install --upgrade pip
 
-(myenv) E:\Duburi_OpenCV>pip install numpy
-Requirement already satisfied: numpy in e:\duburi_opencv\myenv\lib\site-packages (2.2.3)
+(myenv) E:\OpenCV>pip install numpy
+Requirement already satisfied: numpy in e:\opencv\myenv\lib\site-packages (2.2.3)
 
 [notice] A new release of pip is available: 24.3.1 -> 25.0.1
 [notice] To update, run: python.exe -m pip install --upgrade pip
 
-(myenv) E:\Duburi_OpenCV>pip install opencv-python matplotlib numpy
+(myenv) E:\OpenCV>pip install opencv-python matplotlib numpy
 Requirement already satisfied: opencv-python in e:\duburi_opencv\myenv\lib\site-packages (4.11.0.86)
 Requirement already satisfied: matplotlib in e:\duburi_opencv\myenv\lib\site-packages (3.10.1)
 Requirement already satisfied: numpy in e:\duburi_opencv\myenv\lib\site-packages (2.2.3)
@@ -104,7 +104,7 @@ Requirement already satisfied: six>=1.5 in e:\duburi_opencv\myenv\lib\site-packa
 [notice] A new release of pip is available: 24.3.1 -> 25.0.1
 [notice] To update, run: python.exe -m pip install --upgrade pip
 
-(myenv) E:\Duburi_OpenCV>python duburi_test.py
+(myenv) E:\OpenCV>python duburi_test.py
 Processing 1/5: blue_yellow_gradient.jpg
 Grayscale image saved to sample_grayscale\gray_blue_yellow_gradient.jpg
 Processing 2/5: checkerboard.jpg
